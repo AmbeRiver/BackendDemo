@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demobackend
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: demobackend
+    spec:
+      containers:
+      - image: amberriver/demobackend
+        imagePullPolicy: Always
+        name: demobackend
+        ports:
+          - containerPort: 8003
